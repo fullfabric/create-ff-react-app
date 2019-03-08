@@ -35,6 +35,9 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 
+const breakpointsVariables = require('./mediaQueryBreakpoints')
+  .breakpointsVariables;
+
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
@@ -117,6 +120,7 @@ module.exports = function(webpackEnv) {
         loader: require.resolve(preProcessor),
         options: {
           sourceMap: isEnvProduction && shouldUseSourceMap,
+          data: breakpointsVariables,
         },
       });
     }
@@ -322,7 +326,8 @@ module.exports = function(webpackEnv) {
               loader: require.resolve('eslint-loader'),
             },
           ],
-          include: paths.appSrc,
+          include: [paths.appSrc, /node_modules(\/react-components\/src)/],
+          exclude: [paths.appLocaleSrc],
         },
         {
           // "oneOf" will traverse all following loaders until one will
@@ -344,7 +349,7 @@ module.exports = function(webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: paths.appSrc,
+              include: [paths.appSrc, /node_modules(\/react-components\/src)/],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(

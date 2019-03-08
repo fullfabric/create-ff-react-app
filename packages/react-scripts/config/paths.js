@@ -17,7 +17,11 @@ const url = require('url');
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
-const envPublicUrl = process.env.PUBLIC_URL;
+const pkg = require(resolveApp('package.json'));
+const envPublicUrl =
+  process.env.PUBLIC_URL && process.env.HOST !== 'localhost'
+    ? `${process.env.PUBLIC_URL}/${pkg.libraryName}/${pkg.version}`
+    : process.env.PUBLIC_URL;
 
 function ensureSlash(inputPath, needsSlash) {
   const hasSlash = inputPath.endsWith('/');
@@ -84,6 +88,7 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
+  appLocaleSrc: resolveApp('src/locale'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
@@ -106,6 +111,7 @@ module.exports = {
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
+  appLocaleSrc: resolveApp('src/locale'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
@@ -140,6 +146,7 @@ if (
     appPackageJson: resolveOwn('package.json'),
     appSrc: resolveOwn('template/src'),
     appTsConfig: resolveOwn('template/tsconfig.json'),
+    appLocaleSrc: resolveApp('template/src/locale'),
     yarnLockFile: resolveOwn('template/yarn.lock'),
     testsSetup: resolveModule(resolveOwn, 'template/src/setupTests'),
     proxySetup: resolveOwn('template/src/setupProxy.js'),

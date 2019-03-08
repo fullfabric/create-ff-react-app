@@ -207,6 +207,7 @@ function createApp(
 
   const packageJson = {
     name: appName,
+    libraryName: appName,
     version: '0.1.0',
     private: true,
   };
