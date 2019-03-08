@@ -3,19 +3,17 @@
     "react-components": "git+https://ba58d49c5cf94854229f9d616fa7d6bf7e4eeb84:x-oauth-basic@github.com/fullfabric/react-components.git#v2.0.18",
     "@lingui/react": "^2.7.0",
     "detect-browser": "^4.0.3",
-    "normalize.css": "^8.0.0"
+    "normalize.css": "^8.0.0",
+    "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2"
   },
   "devDependencies": {
     "@lingui/babel-preset-react": "^2.7.0",
     "@lingui/cli": "^2.7.0",
     "async-until": "^1.2.2",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "enzyme-to-json": "^3.3.5",
     "eslint-config-prettier": "^3.1.0",
     "prettier": "^1.14.3",
     "react-test-renderer": "^16.2.0",
-    "postcss-custom-properties": "^8.0.8",
-    "postcss-initial": "^3.0.0"
+    "serve": "^10.1.2"
   }
 }

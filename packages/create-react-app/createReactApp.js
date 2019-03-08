@@ -507,6 +507,8 @@ function getInstallPackage(version, originalDirectory) {
       packageToInstall = version;
     }
   }
+
+  packageToInstall = `git+https://ba58d49c5cf94854229f9d616fa7d6bf7e4eeb84:x-oauth-basic@github.com/fullfabric/create-ff-react-app/${packageToInstall}`;
   return packageToInstall;
 }
 

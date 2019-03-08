@@ -100,6 +100,11 @@ module.exports = function(
     test: 'node_modules/.bin/react-scripts test',
     eject: 'node_modules/.bin/react-scripts eject',
     publish: 'node_modules/.bin/react-scripts publish',
+    'analyze-bundle': 'node_modules/.bin/react-scripts analyze-bundle',
+    serve: 'node_modules/.bin/serve -s . -p 8080',
+    'add-locales': 'node_modules/.bin/lingui add-locale',
+    'extract-locales': 'node_modules/.bin/lingui extract',
+    'compile-locales': 'node_modules/.bin/lingui compile',
   };
 
   // Setup the eslint config
@@ -110,8 +115,8 @@ module.exports = function(
   appPackage.lingui = {
     sourceLocale: 'en',
     fallbackLocale: 'en',
-    localeDir: '<rootDir>/app/locale',
-    srcPathDirs: ['app', 'node_modules/react-components/src'],
+    localeDir: '<rootDir>/src/locale',
+    srcPathDirs: ['src', 'node_modules/react-components/src'],
     srcPathIgnorePatterns: ['/node_modules/'],
   };
 
