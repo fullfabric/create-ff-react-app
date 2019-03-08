@@ -207,7 +207,6 @@ function createApp(
 
   const packageJson = {
     name: appName,
-    libraryName: appName,
     version: '0.1.0',
     private: true,
   };
@@ -507,9 +506,6 @@ function getInstallPackage(version, originalDirectory) {
       packageToInstall = version;
     }
   }
-
-  // let packageToInstall =
-  //   'git+https://ba58d49c5cf94854229f9d616fa7d6bf7e4eeb84:x-oauth-basic@github.com/fullfabric/create-ff-react-app.git/react-scripts';
   return packageToInstall;
 }
 

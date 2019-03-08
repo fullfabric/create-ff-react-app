@@ -107,6 +107,8 @@ module.exports = function(
     'compile-locales': 'node_modules/.bin/lingui compile',
   };
 
+  appPackage.libraryName = appName;
+
   // Setup the eslint config
   appPackage.eslintConfig = {
     extends: ['react-app', 'plugin:prettier/recommended'],
