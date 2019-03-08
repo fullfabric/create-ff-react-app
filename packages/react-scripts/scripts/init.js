@@ -95,15 +95,29 @@ module.exports = function(
 
   // Setup the script rules
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test',
-    eject: 'react-scripts eject',
+    start: 'node_modules/.bin/react-scripts start',
+    build: 'node_modules/.bin/react-scripts build',
+    test: 'node_modules/.bin/react-scripts test',
+    eject: 'node_modules/.bin/react-scripts eject',
+    publish: 'node_modules/.bin/react-scripts publish',
   };
 
   // Setup the eslint config
   appPackage.eslintConfig = {
-    extends: 'react-app',
+    extends: ['react-app', 'plugin:prettier/recommended'],
+  };
+
+  appPackage.lingui = {
+    sourceLocale: 'en',
+    fallbackLocale: 'en',
+    localeDir: '<rootDir>/app/locale',
+    srcPathDirs: ['app', 'node_modules/react-components/src'],
+    srcPathIgnorePatterns: ['/node_modules/'],
+  };
+
+  appPackage.prettier = {
+    singleQuote: true,
+    semi: false,
   };
 
   // Setup the browsers list
@@ -156,6 +170,7 @@ module.exports = function(
 
   let command;
   let args;
+  let argsDev;
 
   if (useYarn) {
     command = 'yarnpkg';
@@ -163,6 +178,7 @@ module.exports = function(
   } else {
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
+    argsDev = ['install', '--save-dev', verbose && '--verbose'].filter(e => e);
   }
   args.push('react', 'react-dom');
 
@@ -178,6 +194,14 @@ module.exports = function(
         return `${key}@${templateDependencies[key]}`;
       })
     );
+
+    const templateDevDependencies = require(templateDependenciesPath)
+      .devDependencies;
+    argsDev = argsDev.concat(
+      Object.keys(templateDevDependencies).map(key => {
+        return `${key}@${templateDevDependencies[key]}`;
+      })
+    );
     fs.unlinkSync(templateDependenciesPath);
   }
 
@@ -191,6 +215,12 @@ module.exports = function(
     const proc = spawn.sync(command, args, { stdio: 'inherit' });
     if (proc.status !== 0) {
       console.error(`\`${command} ${args.join(' ')}\` failed`);
+      return;
+    }
+
+    const procDev = spawn.sync(command, argsDev, { stdio: 'inherit' });
+    if (procDev.status !== 0) {
+      console.error(`\`${command} ${argsDev.join(' ')}\` failed`);
       return;
     }
   }

@@ -56,6 +56,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
     transformIgnorePatterns: [
       '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
       '^.+\\.module\\.(css|sass|scss)$',
+      '[/\\\\]node_modules[/\\\\](?!react-components).+\\.(js|jsx|mjs)$',
     ],
     moduleNameMapper: {
       '^react-native$': 'react-native-web',
@@ -68,6 +69,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
       require.resolve('jest-watch-typeahead/filename'),
       require.resolve('jest-watch-typeahead/testname'),
     ],
+    snapshotSerializers: ['enzyme-to-json/serializer'],
   };
   if (rootDir) {
     config.rootDir = rootDir;

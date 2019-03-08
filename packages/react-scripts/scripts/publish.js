@@ -50,7 +50,7 @@ const uploaderFunc = fileName => {
   if (fs.existsSync(localFile(fileName))) {
     s3.putObject(params)
       .promise()
-      .then(data => {
+      .then(() => {
         console.log(
           chalk.green(`Uploaded to ${params.Key} in ${params.Bucket}`)
         );
