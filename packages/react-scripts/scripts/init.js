@@ -175,6 +175,7 @@ module.exports = function(
   if (useYarn) {
     command = 'yarnpkg';
     args = ['add'];
+    argsDev = ['add', '--dev'];
   } else {
     command = 'npm';
     args = ['install', '--save', verbose && '--verbose'].filter(e => e);
