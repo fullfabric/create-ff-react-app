@@ -490,25 +490,26 @@ function run(
 }
 
 function getInstallPackage(version, originalDirectory) {
-  let packageToInstall = 'react-scripts';
-  const validSemver = semver.valid(version);
-  if (validSemver) {
-    packageToInstall += `@${validSemver}`;
-  } else if (version) {
-    if (version[0] === '@' && version.indexOf('/') === -1) {
-      packageToInstall += version;
-    } else if (version.match(/^file:/)) {
-      packageToInstall = `file:${path.resolve(
-        originalDirectory,
-        version.match(/^file:(.*)?$/)[1]
-      )}`;
-    } else {
-      // for tar.gz or alternative paths
-      packageToInstall = version;
-    }
-  }
+  // let packageToInstall = 'react-scripts';
+  // const validSemver = semver.valid(version);
+  // if (validSemver) {
+  //   packageToInstall += `@${validSemver}`;
+  // } else if (version) {
+  //   if (version[0] === '@' && version.indexOf('/') === -1) {
+  //     packageToInstall += version;
+  //   } else if (version.match(/^file:/)) {
+  //     packageToInstall = `file:${path.resolve(
+  //       originalDirectory,
+  //       version.match(/^file:(.*)?$/)[1]
+  //     )}`;
+  //   } else {
+  //     // for tar.gz or alternative paths
+  //     packageToInstall = version;
+  //   }
+  // }
 
-  packageToInstall = `git+https://ba58d49c5cf94854229f9d616fa7d6bf7e4eeb84:x-oauth-basic@github.com/fullfabric/create-ff-react-app/${packageToInstall}`;
+  let packageToInstall =
+    'git+https://ba58d49c5cf94854229f9d616fa7d6bf7e4eeb84:x-oauth-basic@github.com/fullfabric/create-ff-react-app/react-scripts';
   return packageToInstall;
 }
 
